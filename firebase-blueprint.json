@@ -1,0 +1,200 @@
+{
+  "entities": {
+    "Admin": {
+      "title": "Admin",
+      "description": "Administrator profiles with access to college finance and student records",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["super_admin", "accountant", "staff"] },
+        "displayName": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "CollegeClass": {
+      "title": "CollegeClass",
+      "description": "Academic classes and programs like DPT, BS, Diploma",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "session": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "archived"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["name", "code", "session", "status"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Enrolled student at Sarhad University SSC Mailsi / The Physio College Mailsi",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "rollNumber": { "type": "string" },
+        "registrationNumber": { "type": "string" },
+        "name": { "type": "string" },
+        "fatherName": { "type": "string" },
+        "cnic": { "type": "string" },
+        "dob": { "type": "string" },
+        "gender": { "type": "string", "enum": ["Male", "Female", "Other"] },
+        "classId": { "type": "string" },
+        "className": { "type": "string" },
+        "section": { "type": "string" },
+        "phone": { "type": "string" },
+        "parentPhone": { "type": "string" },
+        "address": { "type": "string" },
+        "admissionDate": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Inactive", "Graduated", "Left College"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["studentId", "rollNumber", "name", "fatherName", "classId", "status"]
+    },
+    "FeeType": {
+      "title": "FeeType",
+      "description": "Customizable fee titles like Monthly Fee, Trip Fee, Examination Fee, Lab Fee",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "code": { "type": "string" },
+        "description": { "type": "string" },
+        "defaultAmount": { "type": "number" },
+        "frequency": { "type": "string", "enum": ["One Time", "Monthly", "Quarterly", "Semester", "Annual", "Custom"] },
+        "status": { "type": "string", "enum": ["Active", "Inactive"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "code", "defaultAmount", "frequency", "status"]
+    },
+    "FeeAssignment": {
+      "title": "FeeAssignment",
+      "description": "Assignment of fee types to classes or specific students",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "feeTypeId": { "type": "string" },
+        "feeTitle": { "type": "string" },
+        "targetType": { "type": "string", "enum": ["class", "student"] },
+        "targetId": { "type": "string" },
+        "targetName": { "type": "string" },
+        "amount": { "type": "number" },
+        "dueDate": { "type": "string" },
+        "session": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["feeTypeId", "feeTitle", "targetType", "targetId", "amount", "dueDate"]
+    },
+    "Challan": {
+      "title": "Challan",
+      "description": "Official college fee challan with single or multiple fee items",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "challanNumber": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "fatherName": { "type": "string" },
+        "rollNumber": { "type": "string" },
+        "classId": { "type": "string" },
+        "className": { "type": "string" },
+        "session": { "type": "string" },
+        "issueDate": { "type": "string" },
+        "dueDate": { "type": "string" },
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "fine": { "type": "number" },
+        "discount": { "type": "number" },
+        "totalPayable": { "type": "number" },
+        "paidAmount": { "type": "number" },
+        "remainingAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["PAID", "UNPAID", "PARTIAL", "OVERDUE", "CANCELLED"] },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["challanNumber", "studentId", "classId", "subtotal", "totalPayable", "dueDate", "status"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "Recorded fee payment transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "receiptNumber": { "type": "string" },
+        "challanId": { "type": "string" },
+        "challanNumber": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "rollNumber": { "type": "string" },
+        "className": { "type": "string" },
+        "amountPaid": { "type": "number" },
+        "paymentMethod": { "type": "string", "enum": ["Cash", "Bank Transfer", "Online Transfer", "JazzCash", "EasyPaisa", "Other"] },
+        "transactionId": { "type": "string" },
+        "paymentDate": { "type": "string" },
+        "receivedBy": { "type": "string" },
+        "status": { "type": "string", "enum": ["PAID", "CANCELLED"] },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["receiptNumber", "challanId", "studentId", "amountPaid", "paymentMethod", "paymentDate", "receivedBy", "status"]
+    },
+    "CollegeSettings": {
+      "title": "CollegeSettings",
+      "description": "College branding, contact information, and challan configuration",
+      "type": "object",
+      "properties": {
+        "universityName": { "type": "string" },
+        "collegeName": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "email": { "type": "string" },
+        "website": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "footerNote": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["universityName", "collegeName", "phone", "address"]
+    }
+  },
+  "firestore": {
+    "/admins/{uid}": {
+      "schema": { "$ref": "#/entities/Admin" },
+      "description": "Admin users allowed to manage college records"
+    },
+    "/classes/{classId}": {
+      "schema": { "$ref": "#/entities/CollegeClass" },
+      "description": "Classes, programs, and semester batches"
+    },
+    "/students/{studentId}": {
+      "schema": { "$ref": "#/entities/Student" },
+      "description": "Registered students database"
+    },
+    "/feeTypes/{feeTypeId}": {
+      "schema": { "$ref": "#/entities/FeeType" },
+      "description": "Configurable fee types and titles"
+    },
+    "/feeAssignments/{assignmentId}": {
+      "schema": { "$ref": "#/entities/FeeAssignment" },
+      "description": "Fee schedules assigned to classes or students"
+    },
+    "/challans/{challanId}": {
+      "schema": { "$ref": "#/entities/Challan" },
+      "description": "Issued fee challans"
+    },
+    "/payments/{paymentId}": {
+      "schema": { "$ref": "#/entities/Payment" },
+      "description": "Receipted fee payments"
+    },
+    "/settings/college": {
+      "schema": { "$ref": "#/entities/CollegeSettings" },
+      "description": "Global college branding settings"
+    }
+  }
+}

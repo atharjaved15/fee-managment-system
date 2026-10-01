@@ -1,0 +1,6 @@
+{
+  "name": "Sarhad University & The Physio College Mailsi - Fee Management System",
+  "description": "Comprehensive college fee management, challan generation, receipt printing, and student accounting portal for Sarhad University SSC Mailsi and The Physio College Mailsi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

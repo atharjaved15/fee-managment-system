@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: #1e293b;
+    background-color: #f8fafc;
+  }
+}
+
+/* Print Specific Rules */
+@media print {
+  /* Hide non-printable elements */
+  nav,
+  aside,
+  header,
+  footer,
+  .no-print,
+  .sidebar,
+  button,
+  .toast-container,
+  .action-buttons {
+    display: none !important;
+  }
+
+  /* Make the document container full width and white */
+  body, html {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 11pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .print-only-container {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+
+  .printable-document {
+    box-shadow: none !important;
+    border: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 10mm !important;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Optimize table borders in print */
+  .printable-document table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+  .printable-document th,
+  .printable-document td {
+    border-color: #334155 !important;
+  }
+}
